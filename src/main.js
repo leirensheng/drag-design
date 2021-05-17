@@ -6,6 +6,7 @@ import './style/index.scss'
 import './utils/elementUi'
 import store from './store/index'
 import './utils/antDesignUI'
+import './utils/contextmenu'
 
 regisGlobal(app)
 app.use(router).use(store).mount('#app')

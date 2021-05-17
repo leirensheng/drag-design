@@ -23,7 +23,7 @@
                       "left": 13.29998779296875,
                       "width": 173.4000244140625,
                       "height": 249.5,
-                      "zindex": 2,
+                      "zindex": 1,
                       "textAlign": "center",
                       "color": "#000000",
                       "backgroundColor": "rgba(255, 255, 255, 0)",

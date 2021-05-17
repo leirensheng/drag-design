@@ -21,10 +21,7 @@
       </template>
     </a-form>
   </div>
-  <div v-else>
-    请选中一个元素
-    <a-button>fdsfs</a-button>
-  </div>
+  <div v-else>请选中一个元素</div>
 </template>
 
 <script>

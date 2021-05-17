@@ -1,4 +1,12 @@
 <template>
+  <v-contextmenu ref="contextmenu">
+    <v-contextmenu-item
+      :key="one.label"
+      v-for="one in showVerticalItems"
+      @click="handleContextMenu(one.value)"
+      >{{ one.label }}</v-contextmenu-item
+    >
+  </v-contextmenu>
   <div class="middle-panel">
     <div
       class="canvas-wrapper"
@@ -7,11 +15,6 @@
       @contextmenu.prevent
       @click="handleClickCanvas"
     >
-      <!-- <ContextMenu
-        :style="contextmenuStyle"
-        @select="handleSelect"
-        @hideMenu="hideContextMenu"
-      /> -->
       <template v-for="element in elements" :key="element.uuid">
         <div
           tabIndex="0"
@@ -31,6 +34,7 @@
             @mousedown.stop.prevent="mousedownForMark(point, $event, element)"
           ></div>
           <component
+            v-contextmenu:contextmenu
             :is="element.name"
             class="element-on-edit-canvas"
             v-bind="{
@@ -47,7 +51,7 @@
 
 <script>
 /* eslint-disable no-nested-ternary */
-import { reactive, ref, onMounted } from 'vue'
+import { reactive, ref, onMounted, computed } from 'vue'
 import { mapActions, mapState, useStore } from 'vuex'
 import { limitValue } from '@/utils/index'
 
@@ -61,22 +65,11 @@ const directionKey = {
 export default {
   data() {
     return {
-      points: ['lt', 'rt', 'lb', 'rb', 'l', 'r', 't', 'b'],
-      vLines: [],
-      hLines: []
+      points: ['lt', 'rt', 'lb', 'rb', 'l', 'r', 't', 'b']
     }
   },
 
   computed: {
-    contextmenuStyle() {
-      return {
-        left: `${this.contextmenuPos[0]}px`,
-        top: `${this.contextmenuPos[1]}px`,
-        userSelect: 'none',
-        position: 'absolute',
-        zIndex: 999
-      }
-    },
     ...mapState({
       editingElement: (state) => state.editingElement,
       elements: (state) => state.editingPage && state.editingPage.elements
@@ -88,11 +81,6 @@ export default {
       width: '600px',
       height: '100vh'
     })
-    let contextmenuPos = ref([])
-
-    function hideContextMenu() {
-      contextmenuPos = []
-    }
 
     function checkPoint(point) {
       const hasT = /t/.test(point)
@@ -154,7 +142,6 @@ export default {
 
     const canvasPart = () => {
       function handleClickCanvas(e) {
-        hideContextMenu()
         if (!e.target.classList.contains('element-on-edit-canvas')) {
           store.commit('setEditingElement')
         }
@@ -274,24 +261,103 @@ export default {
         }
       }
     })
+
+    const contextmenuPart = () => {
+      const contextmenuOptions = [
+        {
+          label: '复制',
+          value: 'copy'
+        },
+        {
+          label: '删除',
+          value: 'remove'
+        },
+        {
+          label: '置顶',
+          value: 'move2Top'
+        },
+        {
+          label: '置底',
+          value: 'move2Bottom'
+        },
+        {
+          label: '上移',
+          value: 'addZindex'
+        },
+        {
+          label: '下移',
+          value: 'minusZindex'
+        },
+        /**
+         * contextMenu 白名单，只有匹配白名单列表里的元素，才会显示该选项
+         * 支持正则、数组
+         * 数组：[ElementName]
+         * 正则：RegExp
+         */
+        {
+          label: 'showOnlyButton',
+          value: 'showOnlyButton',
+          elementWhiteList: ['lbp-button']
+        },
+        /**
+         * contextMenu 黑名单，在黑名单列表里的元素，不会显示该选项
+         * 支持正则、数组
+         * 数组：[ElementName]
+         * 正则：RegExp
+         */
+        {
+          label: 'showExcludePicture',
+          value: 'showExcludePicture',
+          elementBlackList: /^lbp-picture/
+        }
+      ]
+      const showVerticalItems = computed(() => {
+        const { editingElement } = store.state
+        if (!editingElement) {
+          return []
+        }
+        const elementName = editingElement.name
+        return contextmenuOptions.filter((option) => {
+          const wl = option.elementWhiteList
+          const bl = option.elementBlackList
+          if (wl) {
+            if (Array.isArray(wl)) return wl.includes(elementName)
+            return wl.test(elementName)
+          }
+          if (bl) {
+            if (Array.isArray(bl)) return !bl.includes(elementName)
+            return !bl.test(elementName)
+          }
+          return true
+        })
+      })
+      function handleContextMenu(value) {
+        store.commit('elementManager', { type: value })
+      }
+      const contextmenu = ref(null)
+      function hideContextMenu() {
+        contextmenu.value.hide()
+      }
+      return {
+        contextmenu,
+        showVerticalItems,
+        hideContextMenu,
+        handleContextMenu
+      }
+    }
     return {
       style,
-      contextmenuPos,
-      hideContextMenu,
       canvas,
       ...dragPart(),
       ...canvasPart(),
       ...changeSizePart(),
       ...keyboardPart(),
       ...getDataPart(),
-      ...getPointStylePart()
+      ...getPointStylePart(),
+      ...contextmenuPart()
     }
   },
   methods: {
-    handleSelect({ key }) {
-      this.elementManager({ type: key })
-      this.hideContextMenu()
-    },
     handleMousedown(element, e) {
       this.hideContextMenu()
       this.setEditingElement(element)

@@ -13,6 +13,7 @@
     "element-plus": "^1.0.2-beta.44",
     "normalize.css": "^8.0.1",
     "sass": "^1.32.12",
+    "v-contextmenu": "^3.0.0",
     "vite": "^2.2.3",
     "vue": "^3.0.5",
     "vue-router": "4",

@@ -245,7 +245,8 @@ export default class Element {
       commonStyle: {
         ...this.commonStyle,
         top: this.commonStyle.top + 20,
-        left: this.commonStyle.left + 20
+        left: this.commonStyle.left + 20,
+        zindex
       }
     })
   }

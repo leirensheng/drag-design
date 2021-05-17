@@ -79,15 +79,18 @@ export default createStore({
       const move2Top = move2Bottom
 
       const addZindex = () => {
-        //   const maxZindex = elements.length
-        //   const eleZindex = editingElement.commonStyle.zindex
-        //   if (eleZindex === maxZindex || eleZindex === 1) return
-        //   const flag = type === 'addZindex' ? 1 : -1
-        //   const swapElement = elements.find(
-        //     (ele) => ele.commonStyle.zindex === eleZindex + flag * 1
-        //   )
-        //   swapZindex(editingElement, swapElement)
+        const maxZindex = elements.length
+        const eleZindex = editingElement.commonStyle.zindex
+        if (eleZindex === maxZindex && type === 'addZindex') return
+        if (eleZindex === 1 && type === 'minusZindex') return
+
+        const direction = type === 'addZindex' ? 1 : -1
+        const swapElement = elements.find(
+          (ele) => ele.commonStyle.zindex === eleZindex + direction
+        )
+        swapZindex(editingElement, swapElement)
       }
+
       const minusZindex = addZindex
 
       const handlers = {

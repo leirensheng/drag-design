@@ -15,6 +15,11 @@ export default {
   data() {
     return {}
   },
+  props: {
+    checkMove: {
+      type: Function
+    }
+  },
   created() {},
   mounted() {},
   methods: {
@@ -29,10 +34,9 @@ export default {
         moveEvent.stopPropagation()
         const { clientX } = moveEvent
         const offset = startX - clientX
+        if (this.checkMove && !this.checkMove(offset)) return
         startX -= offset
-        window.requestAnimationFrame(() => {
-          this.$emit('lineMove', offset)
-        })
+        this.$emit('lineMove', offset)
       }
 
       const up = () => {

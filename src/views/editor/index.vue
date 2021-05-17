@@ -6,7 +6,10 @@
     <div class="middle">
       <middle-panel />
     </div>
-    <Width-Adjust @lineMove="handleLineMove"></Width-Adjust>
+    <Width-Adjust
+      @lineMove="handleLineMove"
+      :checkMove="checkMove"
+    ></Width-Adjust>
     <div class="right" :style="style">
       <right-panel></right-panel>
     </div>
@@ -41,6 +44,9 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    checkMove(offset) {
+      return this.rightWidth + offset >= 266
+    },
     handleLineMove(offset) {
       this.rightWidth += offset
     }

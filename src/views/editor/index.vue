@@ -6,7 +6,8 @@
     <div class="middle">
       <middle-panel />
     </div>
-    <div class="right">
+    <Width-Adjust @lineMove="handleLineMove"></Width-Adjust>
+    <div class="right" :style="style">
       <right-panel></right-panel>
     </div>
   </div>
@@ -16,19 +17,34 @@
 import LeftPanel from './components/leftPanel.vue'
 import MiddlePanel from './components/middlePanel.vue'
 import RightPanel from './components/rightPanel.vue'
+import WidthAdjust from './components/widthAdjust.vue'
 
 export default {
   data() {
-    return {}
+    return {
+      rightWidth: 308
+    }
   },
   components: {
     LeftPanel,
     RightPanel,
+    WidthAdjust,
     MiddlePanel
+  },
+  computed: {
+    style() {
+      return {
+        width: `${this.rightWidth}px`
+      }
+    }
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    handleLineMove(offset) {
+      this.rightWidth += offset
+    }
+  }
 }
 </script>
 
@@ -38,6 +54,7 @@ export default {
   display: flex;
   .left {
     width: 175px;
+    flex-shrink: 0;
   }
   .middle {
     flex: 1;

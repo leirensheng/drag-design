@@ -21,7 +21,13 @@
       </template>
     </a-form>
   </div>
-  <div v-else>请选中一个元素</div>
+  <div v-else class="page-setting">
+    <span>页面宽度：</span>
+    <a-input-number
+      v-if="$store.state.work"
+      v-model:value="$store.state.work.width"
+    ></a-input-number>
+  </div>
 </template>
 
 <script>
@@ -42,6 +48,7 @@ export default {
     },
 
     ...mapState({
+      pageWidth: (state) => state.work,
       editingElement: (state) => state.editingElement
     })
   },
@@ -72,5 +79,10 @@ export default {
 .right-panel {
   padding: 10px;
   height: 100%;
+}
+.page-setting {
+  padding: 10px;
+  display: flex;
+  align-items: center;
 }
 </style>

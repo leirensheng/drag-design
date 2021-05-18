@@ -10,7 +10,9 @@
   <div class="middle-panel">
     <div
       class="canvas-wrapper"
-      :style="style"
+      :style="{
+        width: $store.state.work.width + 'px'
+      }"
       ref="canvas"
       @contextmenu.prevent
       @click="handleClickCanvas"
@@ -77,10 +79,6 @@ export default {
   },
   setup() {
     const store = useStore()
-    const style = reactive({
-      width: '600px',
-      height: '100vh'
-    })
 
     function checkPoint(point) {
       const hasT = /t/.test(point)
@@ -114,7 +112,7 @@ export default {
         const startX = e.clientX
         const startTop = pos.top
         const startLeft = pos.left
-        canvasWidth = Number(style.width.replace('px', ''))
+        canvasWidth = store.state.work.width
         canvasHeight =
           window.getComputedStyle(canvas.value).height.replace('px', '') - 5
 
@@ -177,7 +175,7 @@ export default {
 
         const startX = e.clientX
         const startY = e.clientY
-        canvasWidth = Number(style.width.replace('px', ''))
+        canvasWidth = store.state.work.width
         canvasHeight =
           window.getComputedStyle(canvas.value).height.replace('px', '') - 5
         const move = (moveEvent) => {
@@ -219,13 +217,6 @@ export default {
       return {
         handleDelete
       }
-    }
-
-    const getDataPart = () => {
-      onMounted(() => {
-        store.dispatch('fetchWork')
-      })
-      return {}
     }
 
     const getPointStylePart = () => ({
@@ -346,13 +337,11 @@ export default {
       }
     }
     return {
-      style,
       canvas,
       ...dragPart(),
       ...canvasPart(),
       ...changeSizePart(),
       ...keyboardPart(),
-      ...getDataPart(),
       ...getPointStylePart(),
       ...contextmenuPart()
     }

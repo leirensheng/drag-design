@@ -7,6 +7,7 @@ import {
   Modal,
   Card,
   Menu,
+  Spin,
   InputNumber
 } from 'ant-design-vue'
 import app from '../app'
@@ -22,3 +23,4 @@ app
   .use(Select)
   .use(Button)
   .use(InputNumber)
+  .use(Spin)

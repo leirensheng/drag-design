@@ -4,7 +4,10 @@
       <left-panel />
     </div>
     <div class="middle">
-      <middle-panel />
+      <middle-panel v-if="$store.state.work" />
+      <a-spin v-else>
+        <div style="height: 100vh"></div>
+      </a-spin>
     </div>
     <Width-Adjust
       @lineMove="handleLineMove"
@@ -17,6 +20,8 @@
 </template>
 
 <script>
+import { onMounted } from 'vue'
+import { useStore } from 'vuex'
 import LeftPanel from './components/leftPanel.vue'
 import MiddlePanel from './components/middlePanel.vue'
 import RightPanel from './components/rightPanel.vue'
@@ -41,6 +46,18 @@ export default {
       }
     }
   },
+  setup() {
+    const store = useStore()
+    const getDataPart = () => {
+      onMounted(() => {
+        store.dispatch('fetchWork')
+      })
+      return {}
+    }
+    return {
+      ...getDataPart()
+    }
+  },
   created() {},
   mounted() {},
   methods: {
@@ -56,10 +73,10 @@ export default {
 
 <style scoped lang="scss">
 .editor {
-  height: 100vh;
   display: flex;
   .left {
     width: 175px;
+    height: 100vh;
     flex-shrink: 0;
   }
   .middle {

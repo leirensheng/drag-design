@@ -10,6 +10,14 @@ import Page from '../models/page'
 import Work from '../models/work'
 import testJson from './test.json'
 
+function sleep(time) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, time)
+  })
+}
+
 const defaultState = {
   work: null,
   editingPage: null,
@@ -130,6 +138,7 @@ export default createStore({
       // payload && window.EditorApp.$emit('setEditingElement', payload)
     },
     async fetchWork({ commit }, workId) {
+      await sleep(600)
       commit('setWork', testJson)
       commit('setEditingPage')
     }

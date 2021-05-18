@@ -1,6 +1,11 @@
 <template>
   <div class="preview-wrap">
-    <div class="preview" ref="canvas">
+    <div
+      v-if="$store.state.work"
+      class="preview"
+      ref="canvas"
+      :style="{ width: $store.state.work.width + 'px' }"
+    >
       <template v-for="element in elements" :key="element.uuid">
         <div :style="element.getStyle({ position: 'absolute' })">
           <component
@@ -14,6 +19,9 @@
         </div>
       </template>
     </div>
+    <a-spin v-else>
+      <div style="height: 100vh"></div>
+    </a-spin>
   </div>
 </template>
 

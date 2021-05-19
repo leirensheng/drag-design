@@ -30,6 +30,7 @@ import { mapState, useStore } from 'vuex'
 import { onMounted } from 'vue'
 
 export default {
+  name: 'Preview',
   data() {
     return {}
   },

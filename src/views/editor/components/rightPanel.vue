@@ -6,7 +6,7 @@
       class="props-config-form"
       layout="horizontal"
     >
-      <template v-for="(config, propKey) in pluginProps" :key="propKey">
+      <template v-for="(config, propKey) in componentProps" :key="propKey">
         <a-form-item
           v-if="config.editor"
           v-bind="getFormItemProp(config.editor)"
@@ -32,7 +32,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import plugins from '@/components/plugins/index'
+import { getPropsByName } from '@/utils/element'
 
 export default {
   data() {
@@ -40,11 +40,9 @@ export default {
   },
 
   computed: {
-    pluginProps() {
+    componentProps() {
       if (!this.editingElement) return []
-      const { name } = this.editingElement
-      const target = plugins.find((one) => one.name === name)
-      return target.component.props
+      return getPropsByName(this.editingElement.name)
     },
 
     ...mapState({

@@ -81,6 +81,7 @@ $activeHoverColor: #1593ff;
     position: absolute;
     right: 1px;
     top: 50%;
+    transform: translateY(-50%);
     background-color: #fff;
 
     .indicator {

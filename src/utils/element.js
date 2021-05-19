@@ -79,3 +79,7 @@ function S4() {
 export function guid() {
   return `${S4() + S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`
 }
+
+export function getPropsByName(name) {
+  return app.component(name).props
+}

@@ -33,7 +33,9 @@
             :data-point="point"
             :style="getPointStyle(point, element)"
             class="shape__scale-point"
-            @mousedown.stop.prevent="mousedownForMark(point, $event, element)"
+            @mousedown.stop.prevent="
+              mousedownForMark(point, $event, element, $refs[element.uuid])
+            "
           ></div>
           <component
             v-contextmenu:contextmenu
@@ -53,7 +55,7 @@
 
 <script>
 /* eslint-disable no-nested-ternary */
-import { reactive, ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { mapActions, mapState, useStore } from 'vuex'
 import { limitValue } from '@/utils/index'
 
@@ -170,9 +172,8 @@ export default {
       function limitTop({ top, height }, distance) {
         return limitValue(top + distance, 0, top + height)
       }
-      function mousedownForMark(point, e, element) {
+      function mousedownForMark(point, e, element, component) {
         const startPos = { ...element.commonStyle }
-
         const startX = e.clientX
         const startY = e.clientY
         canvasWidth = store.state.work.width
@@ -201,6 +202,7 @@ export default {
         }
         const up = () => {
           toggleListener('remove', move, up)
+          component.handleResize()
         }
         toggleListener('add', move, up)
       }

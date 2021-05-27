@@ -1,5 +1,6 @@
 import LbpPicture from './lbp-picture.vue'
 import LbpText from './lbp-text.vue'
+import LbpPie from './lbp-pie.vue'
 
 const plugins = [
   {
@@ -16,6 +17,13 @@ const plugins = [
     component: LbpText,
     visible: true,
     name: LbpText.name
+  },
+  {
+    title: '饼图',
+    icon: 'photo',
+    component: LbpPie,
+    visible: true,
+    name: LbpPie.name
   }
 ]
 

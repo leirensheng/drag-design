@@ -45,9 +45,10 @@ export default createStore({
       const len = elements.length
 
       const add = () => {
-        const { props } = value.component
+        const { props, extra } = value.component
         const element = new Element({
           props,
+          extra,
           ...value,
           zindex: len + 1
         })

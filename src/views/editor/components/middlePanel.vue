@@ -17,7 +17,54 @@
       @contextmenu.prevent
       @click="handleClickCanvas"
     >
-      <template v-for="element in elements" :key="element.uuid">
+      <draggable
+        :list="elements"
+        tag="transition-group"
+        :component-data="{
+          tag: 'div',
+          type: 'transition-group',
+          name: !drag ? 'flip-list' : null
+        }"
+        @start="drag = true"
+        @end="drag = false"
+        item-key="uuid"
+        v-bind="dragOptions"
+      >
+        <template #item="{ element }">
+          <div
+            tabIndex="0"
+            @click.stop
+            @mousedown="handleMousedown(element, $event)"
+            @keydown.delete="handleDelete"
+            :style="element.getStyle()"
+            class="component-wrapper"
+            :class="editingElement === element && 'shape__wrapper-active'"
+          >
+            <div
+              v-show="editingElement === element"
+              v-for="point in points"
+              :key="point"
+              :data-point="point"
+              :style="getPointStyle(point, element)"
+              class="shape__scale-point"
+              @mousedown.stop.prevent="
+                mousedownForMark(point, $event, element, $refs[element.uuid])
+              "
+            ></div>
+            <component
+              v-contextmenu:contextmenu
+              :is="element.name"
+              class="element-on-edit-canvas"
+              v-bind="{
+                ...element.getProps(),
+                editorMode: 'edit',
+                isEditingElement: editingElement === element
+              }"
+            ></component>
+          </div>
+        </template>
+      </draggable>
+      <!-- <template v-for="element in elements" :key="element.uuid">
         <div
           tabIndex="0"
           @click.stop
@@ -48,13 +95,14 @@
             }"
           ></component>
         </div>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable no-nested-ternary */
+import draggable from 'vuedraggable/src/vuedraggable'
 import { ref, computed } from 'vue'
 import { mapActions, mapState, useStore } from 'vuex'
 import { limitValue } from '@/utils/index'
@@ -69,11 +117,23 @@ const directionKey = {
 export default {
   data() {
     return {
+      drag: false,
       points: ['lt', 'rt', 'lb', 'rb', 'l', 'r', 't', 'b']
     }
   },
+  components: {
+    draggable
+  },
 
   computed: {
+    dragOptions() {
+      return {
+        animation: 200,
+        group: 'description',
+        disabled: false,
+        ghostClass: 'ghost'
+      }
+    },
     ...mapState({
       editingElement: (state) => state.editingElement,
       elements: (state) => state.editingPage && state.editingPage.elements
@@ -223,8 +283,7 @@ export default {
 
     const getPointStylePart = () => ({
       getPointStyle(point, element) {
-        const isWrapElement = true
-        const { top, left, height, width } = element.commonStyle
+        const { height, width } = element.commonStyle
         const { hasT, hasB, hasL, hasR } = checkPoint(point)
         let newLeft = 0
         let newTop = 0
@@ -244,8 +303,8 @@ export default {
         return {
           marginLeft: hasL || hasR ? '-3px' : 0,
           marginTop: hasT || hasB ? '-3px' : 0,
-          left: `${newLeft + (isWrapElement ? 0 : left)}px`,
-          top: `${newTop + (isWrapElement ? 0 : top)}px`,
+          left: `${newLeft}px`,
+          top: `${newTop}px`,
           cursor: `${point
             .split('')
             .reverse()
@@ -340,7 +399,7 @@ export default {
     }
     return {
       canvas,
-      ...dragPart(),
+      // ...dragPart(),
       ...canvasPart(),
       ...changeSizePart(),
       ...keyboardPart(),
@@ -352,7 +411,7 @@ export default {
     handleMousedown(element, e) {
       this.hideContextMenu()
       this.setEditingElement(element)
-      this.mousedownForElement(e, element.commonStyle)
+      // this.mousedownForElement(e, element.commonStyle)
     },
 
     ...mapActions(['setEditingElement', 'updateWork'])
@@ -365,6 +424,9 @@ export default {
   height: 100%;
   display: flex;
   justify-content: center;
+  .component-wrapper {
+    position: relative !important;
+  }
   .shape__wrapper-active {
     outline: 1px solid #70c0ff !important;
   }

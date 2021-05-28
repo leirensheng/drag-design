@@ -10,7 +10,6 @@ export default {
   name: 'lib-pie',
   extra: {
     defaultStyle: {
-      width: 320,
       height: 400
     }
   },

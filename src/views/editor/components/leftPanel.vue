@@ -1,19 +1,24 @@
 <template>
   <div class="left-panel">
-    <div
-      v-for="one in plugins"
-      :key="one.name"
-      @mousedown="startDrag(one, $event)"
-      class="plugin-item"
+    <draggable
+      :list="plugins"
+      @start="drag = true"
+      @end="drag = false"
+      item-key="name"
     >
-      <span> {{ one.title }}</span>
-    </div>
+      <template #item="{ element }">
+        <div class="plugin-item">
+          <span> {{ element.title }}</span>
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
 <script>
 import plugins from '@/components/plugins'
 import { mapMutations } from 'vuex'
+import draggable from 'vuedraggable/src/vuedraggable'
 
 let dragDom = null
 
@@ -27,6 +32,9 @@ const dragConfig = {
   }
 }
 export default {
+  components: {
+    draggable
+  },
   data() {
     return {
       plugins

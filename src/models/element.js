@@ -11,9 +11,7 @@ const disabledPluginsForEditMode = [
 const cloneObj = (value) => JSON.parse(JSON.stringify(value))
 
 const defaultStyle = {
-  top: 100,
-  left: 100,
-  width: 100,
+  // width: 100,
   height: 40,
   zindex: 1,
   textAlign: 'center',
@@ -182,8 +180,6 @@ export default class Element {
       ...this.packBorderData()
     }
     const style = {
-      top: parsePx(pluginProps.top || commonStyle.top, isRem),
-      left: parsePx(pluginProps.left || commonStyle.left, isRem),
       width: parsePx(pluginProps.width || commonStyle.width, isRem),
       height: parsePx(pluginProps.height || commonStyle.height, isRem),
       fontSize: parsePx(pluginProps.fontSize || commonStyle.fontSize, isRem),
@@ -244,8 +240,6 @@ export default class Element {
       pluginProps: this.pluginProps,
       commonStyle: {
         ...this.commonStyle,
-        top: this.commonStyle.top + 20,
-        left: this.commonStyle.left + 20,
         zindex
       }
     })

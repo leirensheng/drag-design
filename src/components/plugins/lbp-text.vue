@@ -8,6 +8,11 @@
 import PropTypes from '@/utils/propTypes'
 
 export default {
+  extra: {
+    defaultStyle: {
+      height: 'auto'
+    }
+  },
   name: 'lbp-text',
   data() {
     return {}

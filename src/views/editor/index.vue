@@ -87,8 +87,6 @@ export default {
 $headerTop: 50px;
 .editor-container {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
   .editor-top {
     background-color: rgb(0, 21, 41);
     height: $headerTop;
@@ -98,7 +96,7 @@ $headerTop: 50px;
     padding: 0 15px;
   }
   .editor {
-    flex: 1;
+    height: calc(100vh - 50px);
     display: flex;
     .left {
       width: 175px;

@@ -18,7 +18,9 @@
       @click="handleClickCanvas"
     >
       <draggable
+        class="draggable-items"
         :list="elements"
+        group="people"
         tag="transition-group"
         :component-data="{
           tag: 'div',
@@ -421,9 +423,8 @@ export default {
 
 <style scoped lang="scss">
 .middle-panel {
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  height: calc(100vh - 50px);
+  overflow: auto;
   .component-wrapper {
     position: relative !important;
   }
@@ -440,12 +441,13 @@ export default {
     border-radius: 50%;
   }
   .canvas-wrapper {
+    min-height: 100%;
+    margin: 0 auto;
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZAgMAAAC5h23wAAAAAXNSR0IB2cksfwAAAAlQTFRF9fX18PDwAAAABQ8/pgAAAAN0Uk5T/yIA41y2EwAAABhJREFUeJxjYIAC0VAQcGCQWgUCDUONBgDH8Fwzu33LswAAAABJRU5ErkJggg==');
     // background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUeNpiZGBg4GegAsBlCD8TqSYNQg2Mo6FEBAAIMACdPABtrSW/IQAAAABJRU5ErkJggg==');
     background-repeat: repeat;
     background-attachment: fixed;
     background-color: #fff;
-    height: 100%;
     position: relative;
     .element-on-edit-canvas {
       width: 100%;

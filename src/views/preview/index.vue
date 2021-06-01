@@ -7,16 +7,15 @@
       :style="{ width: $store.state.work.width + 'px' }"
     >
       <template v-for="element in elements" :key="element.uuid">
-        <div :style="element.getStyle({ position: 'absolute' })">
-          <component
-            :is="element.name"
-            class="element-on-edit-canvas"
-            v-bind="{
-              ...element.getProps(),
-              editorMode: 'edit'
-            }"
-          ></component>
-        </div>
+        <component
+          :is="element.name"
+          class="element-on-edit-canvas"
+          v-bind="{
+            ...element.pluginProps,
+            editorMode: 'edit',
+            isEditingElement: editingElement === element
+          }"
+        ></component>
       </template>
     </div>
     <a-spin v-else>
@@ -64,13 +63,7 @@ export default {
   display: flex;
   justify-content: center;
   .preview {
-    position: relative;
-    width: 600px;
     height: 100vh;
-    .element-on-edit-canvas {
-      width: 100%;
-      height: 100%;
-    }
   }
 }
 </style>

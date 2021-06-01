@@ -81,5 +81,6 @@ export function guid() {
 }
 
 export function getPropsByName(name) {
-  return app.component(name).props
+  const { props, propsForWrapper } = app.component(name)
+  return { ...propsForWrapper, ...props }
 }

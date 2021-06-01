@@ -1,5 +1,7 @@
 <template>
-  <img :src="showUrl" alt="" srcset="" width="100%" :style="style" />
+  <div :style="wrapStyle">
+    <img :src="showUrl" alt="" srcset="" :style="style" />
+  </div>
 </template>
 
 <script>
@@ -13,6 +15,23 @@ export default {
     return {}
   },
   props: {
+    height: PropTypes.number({
+      label: '高度',
+      props: {
+        formatter: (value) => `${parseInt(value)}px`
+      },
+      defaultValue: 40
+    }),
+    width: PropTypes.number({
+      label: '宽度',
+      defaultValue: 100,
+      props: {
+        formatter: (value) => `${value}%`,
+        step: 1,
+        min: 0,
+        max: 100
+      }
+    }),
     imgSrc: PropTypes.image(),
     fillType: {
       type: String,
@@ -32,12 +51,21 @@ export default {
       }
     }
   },
+
   computed: {
+    wrapStyle() {
+      return {
+        width: `${this.width}%`,
+        height: `${this.height}px`
+      }
+    },
     showUrl() {
       return this.imgSrc || placeholderImg
     },
     style() {
       return {
+        width: '100%',
+        height: '100%',
         objectFit: this.fillType
       }
     }

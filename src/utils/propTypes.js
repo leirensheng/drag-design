@@ -1,8 +1,4 @@
-const defaultNumberInputProp = {
-  // step: 1,
-  // min: 0,
-  // max: 144
-}
+
 
 const dataSourceLayout = {
   labelCol: { span: 24 },
@@ -110,7 +106,7 @@ export default {
   number: ({
     label = '数值',
     defaultValue = 10,
-    props = defaultNumberInputProp,
+    props,
     visible = true,
     ...other
   } = {}) => ({
@@ -225,21 +221,17 @@ export default {
     }
   }),
   select: ({
-    valueType = String,
     label = '选项',
     defaultValue = [],
-    visible = true,
     options = [],
     ...other
   } = {}) => ({
-    type: valueType,
-    default: defaultValue,
-    visible,
     editor: {
       type: 'a-select',
       label,
       props: {
-        options
+        options,
+        defaultValue
       },
       ...other
     }

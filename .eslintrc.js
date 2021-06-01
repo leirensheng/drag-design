@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: ['vue'],
   rules: {
+    radix: 'off',
     'no-plusplus': 'off',
     'no-param-reassign': 'off'
   }

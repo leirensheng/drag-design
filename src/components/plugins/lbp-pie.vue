@@ -1,10 +1,10 @@
 <template>
-  <div ref="chart"></div>
+  <div ref="chart" :style="style"></div>
 </template>
 
 <script>
 import echarts from '@/utils/useEcharts'
-// import echarts from 'echarts'
+import PropTypes from '@/utils/propTypes'
 
 export default {
   name: 'lib-pie',
@@ -17,7 +17,38 @@ export default {
   data() {
     return {}
   },
-  props: {},
+  computed: {
+    style() {
+      return {
+        width: `${this.width}%`,
+        height: `${this.height}px`
+      }
+    }
+  },
+  props: {
+    height: PropTypes.number({
+      label: '高度',
+      props: {
+        formatter: (value) => `${parseInt(value)}px`
+      },
+      defaultValue: 300
+    }),
+    width: PropTypes.number({
+      label: '宽度',
+      defaultValue: 100,
+      props: {
+        formatter: (value) => `${value}%`,
+        step: 1,
+        min: 0,
+        max: 100
+      }
+    })
+  },
+  watch: {
+    style() {
+      this.handleResize()
+    }
+  },
   created() {},
   mounted() {
     this.chart = echarts.init(this.$refs.chart)

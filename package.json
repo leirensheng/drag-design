@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "echarts": "^5.1.1",
     "element-plus": "^1.0.2-beta.44",
+    "mitt": "^2.1.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.32.12",
     "v-contextmenu": "^3.0.0",

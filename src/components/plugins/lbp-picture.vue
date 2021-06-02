@@ -20,7 +20,7 @@ export default {
       props: {
         formatter: (value) => `${parseInt(value)}px`
       },
-      defaultValue: 40
+      defaultValue: 150
     }),
     width: PropTypes.number({
       label: '宽度',

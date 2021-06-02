@@ -12,6 +12,16 @@
           v-bind="getFormItemProp(config.editor)"
         >
           <component
+            v-if="config.isCommon"
+            :is="config.editor.type"
+            v-bind="getComponentProp(config.editor, propKey)"
+            :value="editingElement.commonProps[propKey]"
+            @update:value="
+              (val) => handleCommonUpdate(val, editingElement, propKey)
+            "
+          ></component>
+          <component
+            v-else
             :is="config.editor.type"
             v-bind="getComponentProp(config.editor, propKey)"
             v-model:value="editingElement.pluginProps[propKey]"
@@ -33,6 +43,7 @@
 <script>
 import { mapState } from 'vuex'
 import { getPropsByName } from '@/utils/element'
+import commonProps from './commonProps'
 
 export default {
   data() {
@@ -42,7 +53,10 @@ export default {
   computed: {
     componentProps() {
       if (!this.editingElement) return []
-      return getPropsByName(this.editingElement.name)
+      return {
+        ...commonProps,
+        ...getPropsByName(this.editingElement.name)
+      }
     },
 
     ...mapState({
@@ -53,6 +67,12 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    handleCommonUpdate(val, editingElement, propKey) {
+      editingElement.commonProps[propKey] = val
+      if (editingElement.name === 'lib-pie') {
+        this.$eventBus.emit('resize', editingElement.uuid)
+      }
+    },
     getComponentProp(editor) {
       return {
         ...(editor.props || {})

@@ -5,7 +5,6 @@ import LbpPie from './lbp-pie.vue'
 const plugins = [
   {
     title: '图片',
-
     icon: 'photo',
     component: LbpPicture,
     visible: true,

@@ -34,6 +34,8 @@
       >
         <template #item="{ element }">
           <component
+            :ref="element.uuid"
+            :style="getCommonStyle(element.commonProps, element)"
             tabIndex="0"
             :key="element.uuid"
             @click.stop="handleMousedown(element, $event)"
@@ -186,7 +188,20 @@ export default {
       ...contextmenuPart()
     }
   },
+  mounted() {
+    this.$eventBus.on('resize', (uuid) => {
+      this.$refs[uuid].handleResize()
+    })
+  },
   methods: {
+    getCommonStyle({ paddingTop, paddingBottom, paddingLeft, paddingRight }) {
+      return {
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
+        paddingLeft: `${paddingLeft}px`,
+        paddingRight: `${paddingRight}px`
+      }
+    },
     handleMousedown(element) {
       this.hideContextMenu()
       this.setEditingElement(element)

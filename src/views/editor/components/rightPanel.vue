@@ -97,6 +97,7 @@ export default {
 .right-panel {
   padding: 10px;
   height: 100%;
+  overflow: auto;
 }
 .page-setting {
   padding: 10px;

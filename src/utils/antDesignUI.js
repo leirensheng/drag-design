@@ -28,3 +28,4 @@ app
   .use(Spin)
   .use(Switch)
   .use(Table)
+  .use(Modal)

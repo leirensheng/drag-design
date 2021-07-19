@@ -8,6 +8,7 @@ import './utils/elementUi'
 import store from './store/index'
 import './utils/antDesignUI'
 import './utils/contextmenu'
+import 'clipboard'
 
 const eventBus = mitt()
 app.config.globalProperties.$eventBus = eventBus

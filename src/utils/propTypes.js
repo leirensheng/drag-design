@@ -1,5 +1,3 @@
-
-
 const dataSourceLayout = {
   labelCol: { span: 24 },
   wrapperCol: { span: 24, offset: 0 }
@@ -150,6 +148,28 @@ export default {
       ...other
     }
   }),
+
+  textarea: ({
+    label = '按钮文字',
+    defaultValue = '按钮',
+    component = 'a-textarea',
+    props = { rows: 6 },
+    extra,
+    visible = true,
+    ...other
+  } = {}) => ({
+    type: String,
+    default: defaultValue,
+    visible,
+    editor: {
+      type: component,
+      label,
+      require: true,
+      props,
+      extra,
+      ...other
+    }
+  }),
   textAlign: ({
     label = '文字对齐',
     defaultValue = 'center',
@@ -162,6 +182,23 @@ export default {
       type: 'lbs-text-align',
       label,
       require: true
+    }
+  }),
+  chartOption: ({
+    label = '图表配置',
+    defaultValue = {},
+    visible = true,
+    props = {},
+    ...other
+  } = {}) => ({
+    type: String,
+    default: () => JSON.parse(JSON.stringify(defaultValue)),
+    visible,
+    editor: {
+      type: 'chart-config',
+      label,
+      props,
+      ...other
     }
   }),
   textOptions: ({
@@ -224,15 +261,31 @@ export default {
     label = '选项',
     defaultValue = [],
     options = [],
+    props = {},
     ...other
   } = {}) => ({
+    default: defaultValue,
     editor: {
       type: 'a-select',
       label,
       props: {
         options,
-        defaultValue
+        ...props
       },
+      ...other
+    }
+  }),
+  api: ({
+    label = '数据源',
+    defaultValue = [],
+    props = {},
+    ...other
+  } = {}) => ({
+    default: defaultValue,
+    editor: {
+      type: 'data-source',
+      label,
+      props,
       ...other
     }
   })

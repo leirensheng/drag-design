@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     radix: 'off',
     'no-plusplus': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'vue/no-mutating-props': 'off'
   }
 }

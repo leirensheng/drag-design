@@ -8,7 +8,7 @@
     >
       <template v-for="(config, propKey) in componentProps" :key="propKey">
         <a-form-item
-          v-if="config.editor"
+          v-if="config.editor && config.visible !== false"
           v-bind="getFormItemProp(config.editor)"
         >
           <component
@@ -25,7 +25,9 @@
             :is="config.editor.type"
             v-bind="getComponentProp(config.editor, propKey)"
             v-model:value="editingElement.pluginProps[propKey]"
+            v-model:checked="editingElement.pluginProps[propKey]"
             v-model="editingElement.pluginProps[propKey]"
+            @change="(...arg) => handleChange(config.editor, ...arg)"
           ></component>
         </a-form-item>
       </template>
@@ -67,6 +69,16 @@ export default {
   created() {},
   mounted() {},
   methods: {
+    handleChange(config, ...arg) {
+      if (this.editingElement.name === 'TITLE' && config.label === '标题类型') {
+        const map = {
+          1: 22,
+          2: 16
+        }
+        const fontSize = map[arg[0]] || 14
+        this.editingElement.pluginProps.fontSize = fontSize
+      }
+    },
     handleCommonUpdate(val, editingElement, propKey) {
       editingElement.commonProps[propKey] = val
       if (editingElement.name === 'lib-pie') {
@@ -80,13 +92,14 @@ export default {
     },
     getFormItemProp(editor) {
       const formItemLayout = {
-        labelCol: { span: 6 },
-        wrapperCol: { span: 16, offset: 2 }
+        labelCol: { flex: '80px' },
+        wrapperCol: { flex: '1' }
       }
       return {
         ...formItemLayout,
         label: editor.label,
-        ...editor.layout
+        ...editor.layout,
+        ...editor.props
       }
     }
   }

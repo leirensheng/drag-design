@@ -8,7 +8,9 @@ import {
   Card,
   Menu,
   Spin,
-  InputNumber
+  Table,
+  InputNumber,
+  Switch
 } from 'ant-design-vue'
 import app from '../app'
 // import 'ant-design-vue/dist/antd.css'
@@ -24,3 +26,5 @@ app
   .use(Button)
   .use(InputNumber)
   .use(Spin)
+  .use(Switch)
+  .use(Table)

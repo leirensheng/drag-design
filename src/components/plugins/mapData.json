@@ -1,0 +1,300 @@
+{
+    "seriesData": [
+      {
+        "filter": {
+          "regCity": "445200",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 445200,
+        "name": "揭阳市",
+        "totalCount": 1466,
+        "value": 0.7251,
+        "unqualifiedCount": 403
+      },
+      {
+        "filter": {
+          "regCity": "440800",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440800,
+        "name": "湛江市",
+        "totalCount": 639,
+        "value": 0.8279,
+        "unqualifiedCount": 110
+      },
+      {
+        "filter": {
+          "regCity": "440300",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440300,
+        "name": "深圳市",
+        "totalCount": 9928,
+        "value": 0.8321,
+        "unqualifiedCount": 1667
+      },
+      {
+        "filter": {
+          "regCity": "440500",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440500,
+        "name": "汕头市",
+        "totalCount": 4285,
+        "value": 0.8427,
+        "unqualifiedCount": 674
+      },
+      {
+        "filter": {
+          "regCity": "442000",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 442000,
+        "name": "中山市",
+        "totalCount": 5690,
+        "value": 0.8645,
+        "unqualifiedCount": 771
+      },
+      {
+        "filter": {
+          "regCity": "441900",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441900,
+        "name": "东莞市",
+        "totalCount": 4436,
+        "value": 0.8742,
+        "unqualifiedCount": 558
+      },
+      {
+        "filter": {
+          "regCity": "440100",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440100,
+        "name": "广州市",
+        "totalCount": 26179,
+        "value": 0.8788,
+        "unqualifiedCount": 3174
+      },
+      {
+        "filter": {
+          "regCity": "441500",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441500,
+        "name": "汕尾市",
+        "totalCount": 136,
+        "value": 0.8824,
+        "unqualifiedCount": 16
+      },
+      {
+        "filter": {
+          "regCity": "441300",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441300,
+        "name": "惠州市",
+        "totalCount": 1272,
+        "value": 0.8836,
+        "unqualifiedCount": 148
+      },
+      {
+        "filter": {
+          "regCity": "441800",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441800,
+        "name": "清远市",
+        "totalCount": 304,
+        "value": 0.8947,
+        "unqualifiedCount": 32
+      },
+      {
+        "filter": {
+          "regCity": "445100",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 445100,
+        "name": "潮州市",
+        "totalCount": 1746,
+        "value": 0.9026,
+        "unqualifiedCount": 170
+      },
+      {
+        "filter": {
+          "regCity": "440600",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440600,
+        "name": "佛山市",
+        "totalCount": 15744,
+        "value": 0.903,
+        "unqualifiedCount": 1527
+      },
+      {
+        "filter": {
+          "regCity": "440700",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440700,
+        "name": "江门市",
+        "totalCount": 1980,
+        "value": 0.9131,
+        "unqualifiedCount": 172
+      },
+      {
+        "filter": {
+          "regCity": "441200",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441200,
+        "name": "肇庆市",
+        "totalCount": 343,
+        "value": 0.9184,
+        "unqualifiedCount": 28
+      },
+      {
+        "filter": {
+          "regCity": "440200",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440200,
+        "name": "韶关市",
+        "totalCount": 316,
+        "value": 0.9335,
+        "unqualifiedCount": 21
+      },
+      {
+        "filter": {
+          "regCity": "440400",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440400,
+        "name": "珠海市",
+        "totalCount": 743,
+        "value": 0.9448,
+        "unqualifiedCount": 41
+      },
+      {
+        "filter": {
+          "regCity": "441600",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441600,
+        "name": "河源市",
+        "totalCount": 107,
+        "value": 0.9533,
+        "unqualifiedCount": 5
+      },
+      {
+        "filter": {
+          "regCity": "441700",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441700,
+        "name": "阳江市",
+        "totalCount": 598,
+        "value": 0.9565,
+        "unqualifiedCount": 26
+      },
+      {
+        "filter": {
+          "regCity": "441400",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 441400,
+        "name": "梅州市",
+        "totalCount": 163,
+        "value": 0.9693,
+        "unqualifiedCount": 5
+      },
+      {
+        "filter": {
+          "regCity": "445300",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 445300,
+        "name": "云浮市",
+        "totalCount": 193,
+        "value": 0.9741,
+        "unqualifiedCount": 5
+      },
+      {
+        "filter": {
+          "regCity": "440900",
+          "startTime": "1469980800000",
+          "endTime": "1627747199000",
+          "testResult": "1",
+          "regProvince": "440000"
+        },
+        "regionCode": 440900,
+        "name": "茂名市",
+        "totalCount": 472,
+        "value": 0.9746,
+        "unqualifiedCount": 12
+      }
+    ],
+    "visualMapMin": 0.7251,
+    "visualMapMax": 0.9746
+  }

@@ -28,7 +28,7 @@ export default createStore({
     return defaultState
   },
   mutations: {
-    elementManager(state, { type, value }) {
+    elementManager(state, { type, value, parentUuid }) {
       const { editingPage, editingElement } = state
       const { elements } = editingPage
 
@@ -46,20 +46,31 @@ export default createStore({
       const copy = () => {
         elements.push(editingElement.clone())
       }
-      const remove = () => {
-        const index = elements.findIndex((e) => e.uuid === editingElement.uuid)
-        if (index !== -1) {
-          Modal.confirm({
-            title: '确定删除吗？',
-            icon: h(ExclamationCircleOutlined),
 
-            onOk: (close) => {
-              editingPage.elements.splice(index, 1)
-              close()
-            }
-          })
+      const remove = () => {
+        const handleRemove = (source, allIds) => {
+          const curId = allIds.shift()
+          const i = source.findIndex((one) => one.uuid === curId)
+          if (allIds.length) {
+            const target = source[i]
+            handleRemove(target.children, allIds)
+          } else {
+            source.splice(i, 1)
+          }
         }
-        state.editingElement = null
+        const allIds = [...parentUuid.split('~'), editingElement.uuid].filter(
+          Boolean
+        )
+        Modal.confirm({
+          title: '确定删除吗？',
+          icon: h(ExclamationCircleOutlined),
+
+          onOk: (close) => {
+            handleRemove(elements, allIds)
+            state.editingElement = null
+            close()
+          }
+        })
       }
 
       const handlers = {

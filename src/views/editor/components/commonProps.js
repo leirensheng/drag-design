@@ -1,10 +1,10 @@
 import PropTypes from '@/utils/propTypes'
 
 const map = {
-  paddingTop: '上边距',
-  paddingBottom: '下边距',
-  paddingLeft: '左边距',
-  paddingRight: '右边距'
+  marginTop: '上边距',
+  marginBottom: '下边距',
+  marginLeft: '左边距',
+  marginRight: '右边距'
 }
 const commonProps = {}
 Object.entries(map).forEach(([key, label]) => {

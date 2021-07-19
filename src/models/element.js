@@ -18,6 +18,9 @@ function getUUID(ele) {
 export default class Element {
   constructor(ele) {
     this.name = ele.name
+    if (this.name === 'Container') {
+      this.children = []
+    }
     this.pluginType = ele.name
     this.uuid = getUUID(ele)
     this.pluginProps = this.getPluginProps(ele)

@@ -32,6 +32,10 @@
         </a-form-item>
       </template>
     </a-form>
+
+    <a-button class="save-btn" type="primary" @click="saveAsComponent"
+      >保存</a-button
+    >
   </div>
   <div v-else class="page-setting">
     <span>页面宽度：</span>
@@ -108,9 +112,22 @@ export default {
 
 <style scoped lang="scss">
 .right-panel {
-  padding: 10px;
   height: 100%;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  .props-config-form {
+    padding: 10px 15px 10px 10px;
+
+    overflow: auto;
+    overflow-x: hidden;
+    flex: 1;
+    border-bottom: 1px solid rgba(237, 238, 234, 0.8);
+  }
+  .save-btn {
+    display: block;
+    margin: 10px auto;
+
+  }
 }
 .page-setting {
   padding: 10px;

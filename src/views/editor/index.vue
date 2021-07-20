@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import {getJson} from '@/utils/element.js'
 import { onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import ClipboardJS from 'clipboard'
@@ -104,66 +105,15 @@ export default {
         )
       }
 
-      const getJson = () => {
-        const config =
-          store.state.editingPage && store.state.editingPage.elements
-        let res = JSON.parse(JSON.stringify(config))
-
-        const getOne = (one) => {
-          const {
-            name,
-            pluginProps,
-            commonProps: { marginTop, marginBottom, marginLeft, marginRight }
-          } = one
-          const removeArr = ['uuid']
-          removeArr.forEach((item) => {
-            delete pluginProps[item]
-          })
-
-          const nameMap = {
-            Container: 'CHART_WITH_TEXT'
-          }
-
-          const obj = {
-            elementConfig: {
-              ...pluginProps
-            },
-            type: nameMap[name] || name
-          }
-
-          const isChangeMargin =
-            marginTop + marginLeft + marginBottom + marginRight !== 0
-          if (isChangeMargin) {
-            obj.margin = {
-              top: marginTop,
-              left: marginLeft,
-              bottom: marginBottom,
-              right: marginRight
-            }
-          }
-          if (name.indexOf('CHART') !== -1) {
-            delete obj.elementConfig.options.series[0].data
-            if (obj.elementConfig.options.xAxis) {
-              delete obj.elementConfig.options.xAxis.data
-            }
-          }
-          if (one.children && one.children.length) {
-            obj.items = one.children.map((_) => getOne(_))
-          }
-          return obj
-        }
-
-        res = res.map((one) => getOne(one))
-        // console.log(JSON.stringify(res, null, 4))
-        return JSON.stringify(res, null, 4)
-      }
       const visible = ref(false)
       const json = ref('')
       const jsonHandled = ref('')
 
       const showJson = () => {
         visible.value = true
-        json.value = getJson()
+        json.value = getJson(
+          store.state.editingPage && store.state.editingPage.elements
+        )
         jsonHandled.value = addColor(json.value)
       }
 

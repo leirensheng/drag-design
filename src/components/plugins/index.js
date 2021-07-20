@@ -8,7 +8,6 @@ import PageBreak from './pageBreak.vue'
 import Container from './container.vue'
 import MapChart from './mapChart.vue'
 
-
 const plugins = [
   {
     title: '标题',

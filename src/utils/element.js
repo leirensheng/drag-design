@@ -83,3 +83,55 @@ export function guid() {
 export function getPropsByName(name) {
   return app.component(name).props
 }
+
+export function getJson(config) {
+  let res = JSON.parse(JSON.stringify(config))
+
+  const getOne = (one) => {
+    const {
+      name,
+      pluginProps,
+      commonProps: { marginTop, marginBottom, marginLeft, marginRight }
+    } = one
+    const removeArr = ['uuid']
+    removeArr.forEach((item) => {
+      delete pluginProps[item]
+    })
+
+    const nameMap = {
+      Container: 'CHART_WITH_TEXT'
+    }
+
+    const obj = {
+      elementConfig: {
+        ...pluginProps
+      },
+      type: nameMap[name] || name
+    }
+
+    const isChangeMargin =
+      marginTop + marginLeft + marginBottom + marginRight !== 0
+    if (isChangeMargin) {
+      obj.margin = {
+        top: marginTop,
+        left: marginLeft,
+        bottom: marginBottom,
+        right: marginRight
+      }
+    }
+    if (name.indexOf('CHART') !== -1) {
+      delete obj.elementConfig.options.series[0].data
+      if (obj.elementConfig.options.xAxis) {
+        delete obj.elementConfig.options.xAxis.data
+      }
+    }
+    if (one.children && one.children.length) {
+      obj.items = one.children.map((_) => getOne(_))
+    }
+    return obj
+  }
+
+  res = Array.isArray(res) ? res.map((one) => getOne(one)) : getOne(res)
+  // console.log(JSON.stringify(res, null, 4))
+  return JSON.stringify(res, null, 4)
+}

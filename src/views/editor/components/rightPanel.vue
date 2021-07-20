@@ -33,7 +33,7 @@
       </template>
     </a-form>
 
-    <a-button class="save-btn" type="primary" @click="saveAsComponent"
+    <a-button class="save-btn" type="primary" @click="showSaveDialog"
       >保存</a-button
     >
   </div>
@@ -44,10 +44,22 @@
       v-model:value="$store.state.work.width"
     ></a-input-number>
   </div>
+  <a-modal
+    :visible="isShowSaveDialog"
+    title="保存组件"
+    @cancel="closeDialog"
+    @ok="saveComponent"
+  >
+    <div class="dialog-item">
+      <span>组件名称：</span>
+      <a-input v-model:value="saveComponentName"></a-input>
+    </div>
+  </a-modal>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { ref } from 'vue'
+import { mapState, useStore } from 'vuex'
 import { getPropsByName } from '@/utils/element'
 import commonProps from './commonProps'
 
@@ -55,7 +67,35 @@ export default {
   data() {
     return {}
   },
+  setup() {
+    const store = useStore()
 
+    const saveComponetPart = () => {
+      const saveComponentName = ref('')
+      const isShowSaveDialog = ref(false)
+      const closeDialog = () => {
+        isShowSaveDialog.value = false
+        saveComponentName.value = ''
+      }
+      return {
+        isShowSaveDialog,
+        saveComponentName,
+        saveComponent() {
+          const { commonProps, pluginProps } = store.state.editingElement
+          console.log(JSON.stringify(commonProps, null, 4))
+          console.log(JSON.stringify(pluginProps, null, 4))
+          closeDialog()
+        },
+        closeDialog,
+        showSaveDialog() {
+          isShowSaveDialog.value = true
+        }
+      }
+    }
+    return {
+      ...saveComponetPart()
+    }
+  },
   computed: {
     componentProps() {
       if (!this.editingElement) return []
@@ -126,12 +166,18 @@ export default {
   .save-btn {
     display: block;
     margin: 10px auto;
-
   }
 }
 .page-setting {
   padding: 10px;
   display: flex;
   align-items: center;
+}
+.dialog-item {
+  display: flex;
+  align-items: center;
+  span {
+    flex-shrink: 0;
+  }
 }
 </style>

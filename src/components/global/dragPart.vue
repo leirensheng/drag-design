@@ -187,7 +187,6 @@ export default {
     ...mapActions(['setEditingElement']),
 
     handleMousedown(element) {
-      console.log(1, element)
       //   this.hideContextMenu()
       this.setEditingElement(element)
     },

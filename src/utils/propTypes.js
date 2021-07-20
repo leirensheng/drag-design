@@ -191,7 +191,7 @@ export default {
     props = {},
     ...other
   } = {}) => ({
-    type: String,
+    type: Object,
     default: () => JSON.parse(JSON.stringify(defaultValue)),
     visible,
     editor: {

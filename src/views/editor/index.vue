@@ -123,17 +123,23 @@ export default {
           const nameMap = {
             Container: 'CHART_WITH_TEXT'
           }
+
           const obj = {
             elementConfig: {
-              ...pluginProps,
-              margin: {
-                top: marginTop,
-                left: marginLeft,
-                bottom: marginBottom,
-                right: marginRight
-              }
+              ...pluginProps
             },
             type: nameMap[name] || name
+          }
+
+          const isChangeMargin =
+            marginTop + marginLeft + marginBottom + marginRight !== 0
+          if (isChangeMargin) {
+            obj.margin = {
+              top: marginTop,
+              left: marginLeft,
+              bottom: marginBottom,
+              right: marginRight
+            }
           }
           if (name.indexOf('CHART') !== -1) {
             delete obj.elementConfig.options.series[0].data

@@ -48,6 +48,14 @@ export default {
     }),
     options: PropTypes.chartOption({
       defaultValue: {
+        title: {
+          text: '',
+          left: 'center',
+          top: '10',
+          textStyle: {
+            fontSize: '14'
+          }
+        },
         tooltip: {
           show: true,
           formatter: ''
@@ -78,8 +86,8 @@ export default {
             // },
             label: {
               show: true,
-              color: '#000',
-            //   offset: [50, 50]
+              color: '#000'
+              //   offset: [50, 50]
             }, // 地图中文字内容及样式控制
             emphasis: {
               show: true

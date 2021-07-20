@@ -9,31 +9,37 @@
         :model-value="color"
         @update:model-value="(val) => updateColor(index, val)"
       ></el-color-picker>
-      <PlusCircleOutlined class="add-icon" @click="addOneColor" />
+      <!-- <PlusCircleOutlined class="add-icon" @click="addOneColor" /> -->
 
       <!-- <a-select v-model:value="value.colors"></a-select> -->
     </div>
     <div class="chart-item" v-else>
-      <span>visualMap颜色：</span>
+      <span>visualMap：</span>
       <el-color-picker
+        class="color-picker"
         size="mini"
         v-for="(color, index) in value.visualMap.inRange.color"
         :key="index"
         :model-value="color"
         @update:model-value="(val) => updateVisualMapColor(index, val)"
       ></el-color-picker>
-
-      <!-- <a-select v-model:value="value.colors"></a-select> -->
     </div>
-    <div class="chart-item" v-if="isBar">
+
+    <!-- <div class="chart-item" v-if="isBar">
       <span>x轴标签间隔：</span>
       <a-input v-model:value="value.xAxis.axisLabel.interval"></a-input>
-    </div>
+    </div> -->
     <div class="chart-item" v-if="isBar">
       <span>x轴标签旋转：</span>
       <a-input-number
         v-model:value="value.xAxis.axisLabel.rotate"
       ></a-input-number>
+    </div>
+    <div class="chart-item">
+      <span>图表标题：</span>
+      <a-input v-model:value="value.title.text"></a-input>
+
+      <!-- <a-select v-model:value="value.colors"></a-select> -->
     </div>
     <div class="chart-item" v-if="isBar">
       <span>y轴名称：</span>
@@ -43,7 +49,7 @@
       <span>显示提示框：</span>
       <a-switch v-model:checked="value.tooltip.show"></a-switch>
     </div>
-    <div class="chart-item">
+    <div class="chart-item" v-show="value.tooltip.show">
       <span>提示格式：</span>
       <a-input v-model:value="value.tooltip.formatter"></a-input>
     </div>
@@ -53,7 +59,7 @@
         <span>显示标签：</span>
         <a-switch v-model:checked="series.label.show"></a-switch>
       </div>
-      <div class="chart-item">
+      <div class="chart-item" v-show="series.label.show">
         <span>标签颜色：</span>
         <el-color-picker
           size="mini"
@@ -130,7 +136,7 @@ export default {
         this.value.color = []
       }
       this.value.color.push('rgb(0,0,0)')
-    },
+    }
   }
 }
 </script>
@@ -160,5 +166,10 @@ export default {
     border: 1px solid rgb(238, 234, 234);
     margin-bottom: 10px;
   }
+}
+</style>
+<style lang="scss">
+.color-picker {
+  margin-right: 5px;
 }
 </style>

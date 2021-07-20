@@ -39,6 +39,14 @@ export default {
     options: PropTypes.chartOption({
       defaultValue: {
         color: ['#8671DA'],
+        title: {
+          text: '',
+          left: 'center',
+          top: '10',
+          textStyle: {
+            fontSize: '14'
+          }
+        },
         yAxis: {
           name: '',
           axisLine: {
@@ -64,7 +72,7 @@ export default {
             barWidth: '50%',
             label: {
               show: true,
-              color:'#000',
+              color: '#000',
               position: 'top'
             }
           }
@@ -109,6 +117,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

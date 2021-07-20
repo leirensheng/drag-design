@@ -209,7 +209,7 @@ export default {
 }
 .is-active {
   outline: 1px solid #70c0ff !important;
-  z-index: 88888;
+  z-index: 888;
 }
 .shape__scale-point {
   position: absolute;

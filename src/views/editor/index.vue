@@ -222,7 +222,7 @@ $headerTop: 50px;
 <style lang="scss">
 .json-content {
   margin-top: 20px;
-  z-index: 8888888888;
+  z-index: 88888;
   .json {
     max-height: 60vh;
     overflow: auto;

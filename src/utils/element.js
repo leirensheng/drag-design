@@ -137,5 +137,14 @@ export function getJson(config) {
 
   res = Array.isArray(res) ? res.map((one) => getOne(one)) : getOne(res)
   // console.log(JSON.stringify(res, null, 4))
-  return JSON.stringify(res, null, 4)
+  return JSON.stringify(
+    res,
+    (key, value) => {
+      if (key === 'uniqueId') {
+        return undefined
+      }
+      return value
+    },
+    4
+  )
 }

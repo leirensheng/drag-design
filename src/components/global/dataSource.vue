@@ -1,60 +1,58 @@
 <template>
   <div class="data-source">
-    <div
-      class="item start"
-      v-for="(one, index) in dataAccess"
-      :key="one.uniqueId"
-    >
-      <CloseCircleOutlined class="close-icon" @click="removeOne(index)" />
+    <transition-group name="list" tag="div">
+      <div class="item" v-for="(one, index) in dataAccess" :key="one.uniqueId">
+        <CloseCircleOutlined class="close-icon" @click="removeOne(index)" />
 
-      <div class="row">
-        <span>标识：</span>
-        <a-input v-model:value="one.id" @change="handleChange"></a-input>
-      </div>
-      <div class="row">
-        <span>类型：</span>
-        <a-select
-          v-model:value="one.accessType"
-          :options="accessTypes"
-          @change="(val) => handleTypeChange(one, val)"
-        ></a-select>
-      </div>
-      <div class="row" v-if="one.accessType === 'API'">
-        <span>接口：</span>
-        <a-input
-          v-model:value="one.dataApiUrl"
-          @change="handleChange"
-        ></a-input>
-      </div>
-      <div class="row" v-else>
-        <span>语句：</span>
-        <a-input v-model:value="one.sql" @change="handleChange"></a-input>
-      </div>
-      <div class="row params">
-        <span> 参数：</span>
-        <div>
-          <div
-            class="row one-params"
-            v-for="(oneParams, idx) in one.params"
-            :key="oneParams.uniqueId"
-          >
-            <a-input
-              v-model:value="oneParams.key"
-              placeholder="字段"
-              @blur="handleChange"
-            ></a-input>
-            <a-input
-              v-model:value="oneParams.value"
-              placeholder="值"
-              @blur="handleChange"
-            ></a-input>
-            <CloseCircleOutlined @click="removeOneParams(one, idx)" />
+        <div class="row">
+          <span>标识：</span>
+          <a-input v-model:value="one.id" @change="handleChange"></a-input>
+        </div>
+        <div class="row">
+          <span>类型：</span>
+          <a-select
+            v-model:value="one.accessType"
+            :options="accessTypes"
+            @change="(val) => handleTypeChange(one, val)"
+          ></a-select>
+        </div>
+        <div class="row" v-if="one.accessType === 'API'">
+          <span>接口：</span>
+          <a-input
+            v-model:value="one.dataApiUrl"
+            @change="handleChange"
+          ></a-input>
+        </div>
+        <div class="row" v-else>
+          <span>语句：</span>
+          <a-input v-model:value="one.sql" @change="handleChange"></a-input>
+        </div>
+        <div class="row params">
+          <span> 参数：</span>
+          <div>
+            <div
+              class="row one-params"
+              v-for="(oneParams, idx) in one.params"
+              :key="oneParams.uniqueId"
+            >
+              <a-input
+                v-model:value="oneParams.key"
+                placeholder="字段"
+                @blur="handleChange"
+              ></a-input>
+              <a-input
+                v-model:value="oneParams.value"
+                placeholder="值"
+                @blur="handleChange"
+              ></a-input>
+              <CloseCircleOutlined @click="removeOneParams(one, idx)" />
+            </div>
+
+            <PlusCircleOutlined class="add-icon" @click="addOneParams(one)" />
           </div>
-
-          <PlusCircleOutlined class="add-icon" @click="addOneParams(one)" />
         </div>
       </div>
-    </div>
+    </transition-group>
     <PlusCircleOutlined class="add-icon" @click="addOne" />
   </div>
 </template>
@@ -95,7 +93,7 @@ export default {
 
           one.params = Object.entries(one.params || {}).map(([key, value]) => {
             const curParams = params && params.find((_) => _.key === key)
-            const uniqueId = curParams ? curParams.uniqueId : this.getRandomId()
+            const uniqueId = curParams ? curParams.uniqueId : this.$uniqueId()
             return {
               key,
               value,
@@ -133,14 +131,8 @@ export default {
       this.handleChange()
     },
     removeOne(index) {
-      const dom = this.$el.querySelectorAll('.item')[index]
-      dom.classList.remove('start')
-      dom.classList.add('closing')
-      setTimeout(() => {
-        dom.classList.remove('closing')
-        this.dataAccess.splice(index, 1)
-        this.handleChange()
-      }, 300)
+      this.dataAccess.splice(index, 1)
+      this.handleChange()
     },
     handleTypeChange(obj, val) {
       if (val === 'API') {
@@ -150,16 +142,13 @@ export default {
       }
       this.handleChange()
     },
-    getRandomId() {
-      return Math.random().toString(16).slice(-6)
-    },
     addOne() {
       this.dataAccess.push({
         id: '',
         accessType: 'API',
         dataApiUrl: '',
         params: [],
-        uniqueId: this.getRandomId()
+        uniqueId: this.$uniqueId()
       })
     }
   }
@@ -177,25 +166,7 @@ export default {
     padding: 10px;
     margin-bottom: 10px;
     position: relative;
-    &.start {
-      scale: 0;
-      animation: start 0.2s ease-in-out forwards;
-      @keyframes start {
-        100% {
-          scale: (1);
-        }
-      }
-    }
-    &.closing {
-      scale: (1);
-      // transform-origin: left top;
-      animation: close 0.3s ease-in-out forwards;
-      @keyframes close {
-        100% {
-          scale: (0);
-        }
-      }
-    }
+
     .close-icon {
       cursor: pointer;
       position: absolute;

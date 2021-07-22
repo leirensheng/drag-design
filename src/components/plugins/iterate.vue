@@ -17,6 +17,7 @@
 <script>
 import PropTypes from '@/utils/propTypes'
 
+const uniqueId = Math.random().toString(16).slice(-6)
 export default {
   name: 'ITERATE',
   data() {
@@ -48,6 +49,7 @@ export default {
             showSymbol: false,
             indentFirstLine: false
           },
+          uniqueId,
           type: 'TEXT'
         }
       ]

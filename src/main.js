@@ -1,4 +1,4 @@
-import mitt from 'mitt'
+import addGlobalProperty from './utils/globalProperty'
 import app from './app'
 import router from './router/index'
 import regisGlobal from './components/global'
@@ -10,8 +10,6 @@ import './utils/antDesignUI'
 import './utils/contextmenu'
 import 'clipboard'
 
-const eventBus = mitt()
-app.config.globalProperties.$eventBus = eventBus
-
+addGlobalProperty(app)
 regisGlobal(app)
 app.use(router).use(store).mount('#app')

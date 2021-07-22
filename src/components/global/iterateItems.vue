@@ -1,34 +1,41 @@
 <template>
   <div class="iterate-items">
-    <div v-for="(item, index) in value" :key="index" class="item">
-      <div class="row">
-        <span>内容：</span>
-        <a-input v-model:value="item.elementConfig.template"></a-input>
-      </div>
+    <transition-group name="list" tag="div">
+      <div
+        class="iterate-item"
+        v-for="(item, index) in value"
+        :key="item.uniqueId"
+      >
+        <div class="row">
+          <span>内容：</span>
+          <a-input v-model:value="item.elementConfig.template"></a-input>
+        </div>
 
-      <div class="row">
-        <span>显示符号：</span>
-        <a-switch
-          v-model:checked="item.elementConfig.showSymbol"
-          @change="(val) => simbolChange(item, val)"
-        ></a-switch>
-      </div>
-      <div class="row" v-show="!item.elementConfig.showSymbol">
-        <span>是否缩进：</span>
-        <a-switch
-          v-model:checked="item.elementConfig.indentFirstLine"
-        ></a-switch>
-      </div>
-      <div class="row" v-show="!item.elementConfig.showSymbol">
-        <span>对齐方式：</span>
-        <a-select
-          v-model:value="item.elementConfig.alignment"
-          :options="alignOptions"
-        ></a-select>
-      </div>
+        <div class="row">
+          <span>显示符号：</span>
+          <a-switch
+            v-model:checked="item.elementConfig.showSymbol"
+            @change="(val) => simbolChange(item, val)"
+          ></a-switch>
+        </div>
+        <div class="row" v-show="!item.elementConfig.showSymbol">
+          <span>是否缩进：</span>
+          <a-switch
+            v-model:checked="item.elementConfig.indentFirstLine"
+          ></a-switch>
+        </div>
+        <div class="row" v-show="!item.elementConfig.showSymbol">
+          <span>对齐方式：</span>
+          <a-select
+            v-model:value="item.elementConfig.alignment"
+            :options="alignOptions"
+          ></a-select>
+        </div>
 
-      <CloseCircleOutlined class="close-icon" @click="remove(index)" />
-    </div>
+        <CloseCircleOutlined class="close-icon" @click="remove(index)" />
+      </div>
+    </transition-group>
+
     <PlusCircleOutlined class="add-icon" @click="addOne" />
   </div>
 </template>
@@ -65,7 +72,6 @@ export default {
       if (val) {
         item.elementConfig.alignment = 'LEFT'
         item.elementConfig.indentFirstLine = false
-
       }
     },
     remove(index) {
@@ -80,6 +86,7 @@ export default {
           showSymbol: false,
           indentFirstLine: false
         },
+        uniqueId: this.$uniqueId(),
         type: 'TEXT'
       })
     }
@@ -89,7 +96,7 @@ export default {
 
 <style scoped lang="scss">
 .iterate-items {
-  .item {
+  .iterate-item {
     padding: 10px;
     margin: 10px 0;
     position: relative;
@@ -109,7 +116,6 @@ export default {
       transform: translateX(-50%) translateY(-50%);
       top: 0;
     }
-
   }
 }
 </style>

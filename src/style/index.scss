@@ -30,3 +30,10 @@
     background-color: #7d7d7d;
   }
 }
+
+.list-enter-active,.list-leave-active{
+  transition:all 0.3s ease-in-out;
+}
+.list-enter-from,.list-leave-to{
+  transform: scale(0);
+}

@@ -20,7 +20,8 @@ export default {
   props: {
     '@class': PropTypes.string({
       label: '@class',
-      defaultValue: 'com.ccr.report.configs.TitleConfig'
+      visible: false,
+      defaultValue: 'com.ccr.report.configs.TextConfig'
     }),
 
     alignment: PropTypes.select({

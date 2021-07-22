@@ -37,13 +37,7 @@
       >保存</a-button
     >
   </div>
-  <div v-else class="page-setting">
-    <span>页面宽度：</span>
-    <a-input-number
-      v-if="$store.state.work"
-      v-model:value="$store.state.work.width"
-    ></a-input-number>
-  </div>
+
   <a-modal
     :visible="isShowSaveDialog"
     title="保存组件"

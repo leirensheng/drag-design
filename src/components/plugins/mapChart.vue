@@ -37,6 +37,11 @@ export default {
     }
   },
   props: {
+    '@class': PropTypes.string({
+      label: '@class',
+      visible: false,
+      defaultValue: 'com.ccr.report.configs.ChartConfig'
+    }),
     dataAccess: PropTypes.api(),
 
     height: PropTypes.number({

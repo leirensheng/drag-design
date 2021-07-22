@@ -4,7 +4,6 @@ import BarChart from './barChart.vue'
 import Title from './title.vue'
 import Text from './text.vue'
 import Table from './myTable.vue'
-import PageBreak from './pageBreak.vue'
 import Container from './container.vue'
 import MapChart from './mapChart.vue'
 
@@ -17,29 +16,21 @@ const plugins = [
     name: Title.name
   },
   {
-    title: '模板',
+    title: '文本',
     icon: 'photo',
     component: Text,
     visible: true,
     name: Text.name
   },
   {
-    title: '表格',
+    title: '数据表',
     icon: 'photo',
     component: Table,
     visible: true,
     name: Table.name
   },
   {
-    title: '分页符',
-    icon: 'photo',
-    component: PageBreak,
-    visible: true,
-    name: PageBreak.name
-  },
-
-  {
-    title: '容器',
+    title: '图文组合',
     icon: 'photo',
     component: Container,
     visible: true,

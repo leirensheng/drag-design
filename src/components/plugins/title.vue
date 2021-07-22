@@ -81,6 +81,7 @@ export default {
 
     '@class': PropTypes.string({
       label: '@class',
+      visible: false,
       defaultValue: 'com.ccr.report.configs.TitleConfig'
     }),
     text: PropTypes.string({

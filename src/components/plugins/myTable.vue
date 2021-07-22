@@ -14,7 +14,8 @@ export default {
   props: {
     '@class': PropTypes.string({
       label: '@class',
-      defaultValue: 'com.ccr.report.configs.TitleConfig'
+      defaultValue: 'com.ccr.report.configs.TableConfig',
+      visible: false
     }),
     dataAccess: PropTypes.api()
   },

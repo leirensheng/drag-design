@@ -41,6 +41,7 @@ export default createStore({
           ...value
         })
         elements.push(element)
+        this.commit('setEditingElement', element)
       }
 
       const copy = () => {

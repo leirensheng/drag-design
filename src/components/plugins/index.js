@@ -6,6 +6,10 @@ import Text from './text.vue'
 import Table from './myTable.vue'
 import Container from './container.vue'
 import MapChart from './mapChart.vue'
+import Image from './image.vue'
+import Iterate from './iterate.vue'
+import Catalogue from './catalogue.vue'
+import QrCode from './qrCode.vue'
 
 const plugins = [
   {
@@ -30,11 +34,40 @@ const plugins = [
     name: Table.name
   },
   {
+    title: '图片',
+    icon: 'photo',
+    component: Image,
+    visible: true,
+    name: Image.name
+  },
+  {
+    title: '文本列表',
+    icon: 'photo',
+    component: Iterate,
+    visible: true,
+    name: Iterate.name
+  },
+  {
     title: '图文组合',
     icon: 'photo',
     component: Container,
     visible: true,
     name: Container.name
+  },
+
+  {
+    title: '目录',
+    icon: 'photo',
+    component: Catalogue,
+    visible: true,
+    name: Catalogue.name
+  },
+  {
+    title: '二维码',
+    icon: 'photo',
+    component: QrCode,
+    visible: true,
+    name: QrCode.name
   },
 
   // {

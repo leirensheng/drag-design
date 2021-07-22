@@ -288,5 +288,19 @@ export default {
       props,
       ...other
     }
+  }),
+  items: ({
+    label = '项目',
+    defaultValue = [],
+    props = {},
+    ...other
+  } = {}) => ({
+    default: defaultValue,
+    editor: {
+      type: 'iterate-items',
+      label,
+      props,
+      ...other
+    }
   })
 }

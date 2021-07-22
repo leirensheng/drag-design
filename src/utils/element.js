@@ -125,6 +125,10 @@ export function getJson(config) {
         delete obj.elementConfig.options.xAxis.data
       }
     }
+    if (name === 'ITERATE') {
+      obj.items = obj.elementConfig.items
+      delete obj.elementConfig.items
+    }
     if (one.children && one.children.length) {
       obj.items = one.children.map((_) => getOne(_))
     }
